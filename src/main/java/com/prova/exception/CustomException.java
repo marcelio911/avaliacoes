@@ -19,7 +19,11 @@ import com.prova.enums.HttpEnum;
 @XmlTransient
 public abstract class CustomException extends RuntimeException {
 
-    protected String mensagemCustimzada;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected String mensagemCustimzada;
     protected String codigoResponse;
     protected HttpStatus status;
 

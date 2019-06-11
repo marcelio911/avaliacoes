@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.prova.dto.ProdutoDTO;
 import com.prova.enums.HttpEnum;
 
 import lombok.Getter;

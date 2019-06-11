@@ -11,8 +11,6 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -32,7 +30,6 @@ import com.prova.dto.ProdutoDTO;
 import com.prova.entity.ProdutoEntity;
 import com.prova.enums.HttpEnum;
 import com.prova.exception.ResourceExceptionGeneric;
-import com.prova.response.HttpListResponseGeneric;
 import com.prova.response.ProdutoHttpResponse;
 
 import lombok.extern.slf4j.Slf4j;
@@ -50,7 +47,7 @@ public class ProdutoController {
 	@Autowired
 	private ProdutoDAO dao;
 
-	private static final Logger logger = LoggerFactory.getLogger(ProdutoController.class);
+	// 	private static final Logger logger = LoggerFactory.getLogger(ProdutoController.class);
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.PUT)
 	public ProdutoHttpResponse<ProdutoDTO> saveAndFlush(@RequestBody @Valid ProdutoEntity mun) throws Exception {
@@ -66,7 +63,8 @@ public class ProdutoController {
 			if (Objects.isNull(saved)) {
 				throw new ProdutoNotFoundException();
 			} else {
-				ProdutoHttpResponse<ProdutoDTO> response = new ProdutoHttpResponse<ProdutoDTO>(HttpEnum.MSG_ERRO_NENHUM_RESULTADO_MR01, HttpStatus.ACCEPTED);
+				ProdutoHttpResponse<ProdutoDTO> response = new ProdutoHttpResponse<ProdutoDTO>(
+						HttpEnum.MSG_ERRO_NENHUM_RESULTADO_MR01, HttpStatus.ACCEPTED);
 				return response.build(produtoDTO);
 
 			}
@@ -83,9 +81,10 @@ public class ProdutoController {
 			if (Objects.isNull(listaDetalhes)) {
 				throw new ProdutoNotFoundException();
 			} else {
-				ProdutoHttpResponse<ProdutoDTO> response = new ProdutoHttpResponse<ProdutoDTO>(HttpEnum.MSG_SUCESSO_OPERACAO_GENERICA, HttpStatus.ACCEPTED);
+				ProdutoHttpResponse<ProdutoDTO> response = new ProdutoHttpResponse<ProdutoDTO>(
+						HttpEnum.MSG_SUCESSO_OPERACAO_GENERICA, HttpStatus.ACCEPTED);
 				return response.build(produtoDTO.createList(listaDetalhes));
-			}			
+			}
 		}
 	}
 
@@ -100,7 +99,8 @@ public class ProdutoController {
 			if (Objects.isNull(detalhes.get())) {
 				throw new ProdutoNotFoundException();
 			} else {
-				ProdutoHttpResponse<ProdutoDTO> response = new ProdutoHttpResponse<ProdutoDTO>(HttpEnum.MSG_SUCESSO_OPERACAO_GENERICA, HttpStatus.ACCEPTED);
+				ProdutoHttpResponse<ProdutoDTO> response = new ProdutoHttpResponse<ProdutoDTO>(
+						HttpEnum.MSG_SUCESSO_OPERACAO_GENERICA, HttpStatus.ACCEPTED);
 				return response.build(produtoDTO);
 			}
 		}
@@ -116,7 +116,8 @@ public class ProdutoController {
 					HttpEnum.MSG_SUCESSO_OPERACAO_GENERICA, HttpStatus.ACCEPTED);
 			ProdutoDTO produtoDTO = new ProdutoDTO();
 			produtoDTO.build(detalhes.get());
-			response.build(produtoDTO);;
+			response.build(produtoDTO);
+			;
 			return response;
 		}
 	}
@@ -128,10 +129,10 @@ public class ProdutoController {
 	}
 
 	@ResponseStatus(HttpStatus.NOT_FOUND)
-	static class ProdutoNotFoundException extends ResourceExceptionGeneric<ProdutoDTO> {
-		
+	static class ProdutoNotFoundException extends ResourceExceptionGeneric {
+
 		ProdutoNotFoundException() {
-			super(HttpEnum.MSG_ERRO_NENHUM_RESULTADO_MR01,	HttpStatus.BAD_REQUEST);
+			super(HttpEnum.MSG_ERRO_NENHUM_RESULTADO_MR01, HttpStatus.BAD_REQUEST);
 		}
 	}
 
