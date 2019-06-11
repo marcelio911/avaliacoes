@@ -26,6 +26,10 @@ public class ProdutoEntity {
 	@Column(name = "vl_produto")
 	private BigDecimal valor;
 	
+	@NotNull(message = "Por favor insira uma imagem para o produto")
+	@Column(name = "im_miniatura_produto")
+	private String miniatura;
+	
 	public ProdutoEntity() {
 		// TODO Auto-generated constructor stub
 	}
@@ -53,6 +57,15 @@ public class ProdutoEntity {
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
+	
+	public String getMiniatura() {
+		return miniatura;
+	}
+
+	public void setMiniatura(String miniatura) {
+		this.miniatura = miniatura;
+	}
+
 	@Override
 	public String toString() {
 		return "ProdutoEntity:: " + this.id + ", " + this.descricao + ", " + this.valor ;
