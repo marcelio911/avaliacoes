@@ -1,0 +1,90 @@
+HELP.md
+prova-api/target/
+prova-api!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+prova-api/.apt_generated
+prova-api/.classpath
+prova-api/.factorypath
+prova-api/.project
+prova-api/.settings
+prova-api/.springBeans
+prova-api/.sts4-cache
+
+### IntelliJ IDEA ###
+prova-api/.idea
+prova-api/*.iws
+prova-api/*.iml
+prova-api/*.ipr
+
+### NetBeans ###
+prova-api//nbproject/private/
+prova-api//nbbuild/
+prova-api//dist/
+prova-api//nbdist/
+prova-api//.nb-gradle/
+prova-api//build/
+
+### VS Code ###
+prova-api/.vscode/
+
+
+
+##Frontend
+prova-Frontend/.vscode/
+# OSX
+#
+prova-Frontend/.DS_Store
+
+# Xcode
+#
+prova-Frontend/build/
+prova-Frontend/*.pbxuser
+prova-Frontend/!default.pbxuser
+prova-Frontend/*.mode1v3
+prova-Frontend/!default.mode1v3
+prova-Frontend/*.mode2v3
+prova-Frontend/!default.mode2v3
+prova-Frontend/*.perspectivev3
+prova-Frontend/!default.perspectivev3
+prova-Frontend/xcuserdata
+prova-Frontend/*.xccheckout
+prova-Frontend/*.moved-aside
+prova-Frontend/DerivedData
+prova-Frontend/*.hmap
+prova-Frontend/*.ipa
+prova-Frontend/*.xcuserstate
+prova-Frontend/project.xcworkspace
+
+# Android/IntelliJ
+#
+prova-Frontend/build/
+prova-Frontend/.idea
+prova-Frontend/.gradle
+prova-Frontend/local.properties
+prova-Frontend/*.iml
+
+# node.js
+#
+prova-Frontend/node_modules/
+prova-Frontend/npm-debug.log
+prova-Frontend/yarn-error.log
+
+# BUCK
+buck-out/
+\.buckd/
+*.keystore
+
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://docs.fastlane.tools/best-practices/source-control/
+
+*/fastlane/report.xml
+*/fastlane/Preview.html
+*/fastlane/screenshots
+
+# Bundle artifact
+*.jsbundle
