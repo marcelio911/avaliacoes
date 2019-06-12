@@ -43,7 +43,7 @@ public class ProdutoDTO implements BaseDTO<ProdutoEntity>{
 	}
 
 	@Override
-	public BaseDTO build(ProdutoEntity entidade) {
+	public BaseDTO<ProdutoEntity> build(ProdutoEntity entidade) {
 		this.id = entidade.getId();
 		this.descricao = entidade.getDescricao();
 		this.valor = entidade.getValor();
@@ -54,9 +54,9 @@ public class ProdutoDTO implements BaseDTO<ProdutoEntity>{
 	public List<ProdutoDTO> createList(List<ProdutoEntity> listaEntity) {
 		List<ProdutoDTO> array = new ArrayList<ProdutoDTO>();
         for (ProdutoEntity detalhes : listaEntity) {
-        	ProdutoDTO pagina = new ProdutoDTO();
-            pagina.build(detalhes);
-            array.add(pagina);
+        	ProdutoDTO produtoDTO = new ProdutoDTO();
+        	produtoDTO.build(detalhes);
+            array.add(produtoDTO);
         }
         return array;
 	}

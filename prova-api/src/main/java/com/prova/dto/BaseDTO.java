@@ -8,7 +8,7 @@ import java.util.List;
  */
 public interface BaseDTO<T> {
 	
-	public BaseDTO build(T entidade);
+	public BaseDTO<T> build(T entidade);
     
 	public List<?> createList(List<T> listaEntity);
 }

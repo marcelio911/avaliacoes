@@ -1,12 +1,17 @@
 package com.prova.entity;
 
 import java.math.BigDecimal;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -29,11 +34,15 @@ public class ProdutoEntity {
 	@NotNull(message = "Por favor insira uma imagem para o produto")
 	@Column(name = "im_miniatura_produto")
 	private String miniatura;
-	
-	public ProdutoEntity() {
-		// TODO Auto-generated constructor stub
-	}
+		
+	@OneToMany(mappedBy = "produtoNoCarrinho", cascade = CascadeType.ALL)
+    private Set<CarrinhoComprasEntity> carrinho;
 
+    public ProdutoEntity(CarrinhoComprasEntity... carrinho) {
+        this.carrinho = Stream.of(carrinho).collect(Collectors.toSet());
+        this.carrinho.forEach(x -> x.setProdutoNoCarrinho(this));
+    }
+	
 	public Long getId() {
 		return id;
 	}
@@ -65,6 +74,8 @@ public class ProdutoEntity {
 	public void setMiniatura(String miniatura) {
 		this.miniatura = miniatura;
 	}
+
+	
 
 	@Override
 	public String toString() {
