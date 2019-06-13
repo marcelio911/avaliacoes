@@ -1,6 +1,7 @@
 import { Card, Button } from 'react-native-material-design';
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
+import {YellowBox} from 'react-native';
 
 export default class Carrinho extends React.PureComponent{
     
@@ -19,6 +20,9 @@ export default class Carrinho extends React.PureComponent{
 
         const response = await fetch(`http://localhost/api/carrinho?ts=${timestamp}&orderBy=name&limit=10&apikey=${PUBLIC_KEY}&hash=${hash.hex()}`)
         const responseJson = await response.json()
+        if (!responseJson.data){
+            YellowBox.ignoreWarnings(['Informação: ...ainda não existem dados registrados']);
+        }
         this.setState({data: responseJson.data.results})
     }
 
