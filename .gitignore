@@ -1,4 +1,4 @@
-HELP.md
+
 prova-api/target/
 prova-api!.mvn/wrapper/maven-wrapper.jar
 
@@ -18,12 +18,12 @@ prova-api/*.iml
 prova-api/*.ipr
 
 ### NetBeans ###
-prova-api//nbproject/private/
-prova-api//nbbuild/
-prova-api//dist/
-prova-api//nbdist/
-prova-api//.nb-gradle/
-prova-api//build/
+prova-api/nbproject/private/
+prova-api/nbbuild/
+prova-api/dist/
+prova-api/nbdist/
+prova-api/.nb-gradle/
+prova-api/build/
 
 ### VS Code ###
 prova-api/.vscode/
@@ -31,44 +31,45 @@ prova-api/.vscode/
 
 
 ##Frontend
-prova-Frontend/.vscode/
+provafrontend/.vscode/
 # OSX
 #
-prova-Frontend/.DS_Store
+provafrontend/.DS_Store
 
 # Xcode
 #
-prova-Frontend/build/
-prova-Frontend/*.pbxuser
-prova-Frontend/!default.pbxuser
-prova-Frontend/*.mode1v3
-prova-Frontend/!default.mode1v3
-prova-Frontend/*.mode2v3
-prova-Frontend/!default.mode2v3
-prova-Frontend/*.perspectivev3
-prova-Frontend/!default.perspectivev3
-prova-Frontend/xcuserdata
-prova-Frontend/*.xccheckout
-prova-Frontend/*.moved-aside
-prova-Frontend/DerivedData
-prova-Frontend/*.hmap
-prova-Frontend/*.ipa
-prova-Frontend/*.xcuserstate
-prova-Frontend/project.xcworkspace
+provafrontend/build/
+provafrontend/*.pbxuser
+provafrontend/!default.pbxuser
+provafrontend/*.mode1v3
+provafrontend/!default.mode1v3
+provafrontend/*.mode2v3
+provafrontend/!default.mode2v3
+provafrontend/*.perspectivev3
+provafrontend/!default.perspectivev3
+provafrontend/xcuserdata
+provafrontend/*.xccheckout
+provafrontend/*.moved-aside
+provafrontend/DerivedData
+provafrontend/*.hmap
+provafrontend/*.ipa
+provafrontend/*.xcuserstate
+provafrontend/project.xcworkspace
 
 # Android/IntelliJ
 #
-prova-Frontend/build/
-prova-Frontend/.idea
-prova-Frontend/.gradle
-prova-Frontend/local.properties
-prova-Frontend/*.iml
+provafrontend/build/
+provafrontend/.idea
+provafrontend/.gradle
+provafrontend/local.properties
+provafrontend/*.iml
 
 # node.js
 #
-prova-Frontend/node_modules/
-prova-Frontend/npm-debug.log
-prova-Frontend/yarn-error.log
+*/node_modules
+provafrontend/node_modules/
+provafrontend/npm-debug.log
+provafrontend/yarn-error.log
 
 # BUCK
 buck-out/
@@ -80,7 +81,7 @@ buck-out/
 # It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
 # screenshots whenever they are needed.
 # For more information about the recommended setup visit:
-# https://docs.fastlane.tools/best-practices/source-control/
+# https:/docs.fastlane.tools/best-practices/source-control/
 
 */fastlane/report.xml
 */fastlane/Preview.html

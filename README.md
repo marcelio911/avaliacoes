@@ -43,12 +43,16 @@ avaliacoes
 
 ## Dados de acesso
 * [Acessar: http://localhost:2222/]
-    * [Acessar: http://localhost:2222/]
+    * [method (list):  http://localhost:2222/api/{endpoint}/listarTodos]
+    * [method (findById):  http://localhost:2222/api/{endpoint}/obterPorId/{id}]
+    * [method (deleteById):  http://localhost:2222/api/{endpoint}/deletePorId/{id}]
+    * [method (save):  http://localhost:2222/api/{endpoint}/salvar]
 
 
 ## Estrutura do projeto FRONT-END
 ```
-├── prova-frontend
+avaliacoes
+├── provafrontend
 │   ├── android
 │   ├── assets
 │   ├── ios
