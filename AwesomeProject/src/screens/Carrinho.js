@@ -99,7 +99,7 @@ export default class Carrinho extends React.PureComponent {
 
     _onItemPress = (item) => {
         this.state.addCarrinhoModal = true;
-        this.props.navigation.navigate('Descrição', { produto: item })
+        this.props.navigation.navigate('AddProdutoModal', { produto: item , isVisible: true})
     }
 
     handleLoadMore = () => {
