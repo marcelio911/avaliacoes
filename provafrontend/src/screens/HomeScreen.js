@@ -7,10 +7,11 @@ import {
     StyleSheet,
     StatusBar,
     TouchableOpacity,
+    Button,
     TouchableWithoutFeedback
 } from 'react-native';
 import React, { Component } from 'react';
-import { name as appName } from './../../../app.json';
+import { name as appName } from '../../app.json';
 
 class HomeScreen extends React.Component {
     static navigationOptions = {

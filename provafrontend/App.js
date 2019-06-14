@@ -23,6 +23,8 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import HeaderCustom from './src/components/header';
+import Carrinho from './src/screens/Carrinho';
 
 const App = () => {
   return (
@@ -32,7 +34,8 @@ const App = () => {
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
-          <Header />
+          <HeaderCustom title="Lista de Produtos" />
+          <Carrinho />
           <View style={styles.body}>
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Step One</Text>

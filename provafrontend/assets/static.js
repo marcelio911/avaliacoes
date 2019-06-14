@@ -1,7 +1,7 @@
 const images = {
 	menuIcon: require('./imagens/produto.jpg'),
-	profileIcon: require('/img/profile-icon.png'),
-	settingsIcon: require('./img/settings-icon.png'),
+	profileIcon: require('./imagens/produto.jpg'),
+	settingsIcon: require('./imagens/produto.jpg'),
 };
 
 export default images;

@@ -5,12 +5,13 @@ import {
     Text, 
     View, 
     AppRegistry,
+    ActivityIndicator,
     Image
 } from 'react-native';
 import { YellowBox } from 'react-native';
 import Produto from '../components/Produto';
 import { name as appName } from '../../app.json';
-import { server as apiServer } from '../../app.json';
+import { apiServer as server } from '../../app.json';
 import axios from 'axios';
 import images from '../../assets/static';
 
