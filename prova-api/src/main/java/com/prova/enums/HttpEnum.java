@@ -7,21 +7,21 @@ package com.prova.enums;
 
 /**
  *
- * @author geldopc
+ * @author marcelio
  */
 public enum HttpEnum {
     /*
      * mensagens de sucesso
      */
     MSG_SUCESSO_OPERACAO_GENERICA("MS0001", "Esta operação foi efetuada com sucesso."),
-    MSG_SUCESSO_MS02("MS0002", "A versão do aplicativo está atualizada."),
-    MSG_SUCESSO_MS03("MS0003", "Este item foi removido com Sucesso."),
+    MSG_SUCESSO_ATUALIZACAO("MS0002", "A versão do aplicativo está atualizada."),
+    MSG_SUCESSO_DELETE("MS0003", "Este item foi removido com Sucesso."),
     /*
      * mensagens de erro
      */
-    MSG_ERRO_DADOS_INVALIDOS_MR00("MR0000", "Dados inválidos."),
-    MSG_ERRO_NENHUM_RESULTADO_MR01("MR0001", "Nenhum resultado encontrado para esta consulta."),
-    MSG_ERRO_GENERICO_MR01("MR0001", "Não foi possível concluir a operação");
+    MSG_ERRO_DADOS_INVALIDOS_MR0000("MR0000", "Dados inválidos."),
+    MSG_ERRO_NENHUM_RESULTADO_MR0404("MR0404", "Nenhum resultado encontrado para esta consulta."),
+    MSG_ERRO_GENERICO_MR0500("MR0500", "Não foi possível continuar a executar esta operação");
     
 
     private final String codigo;

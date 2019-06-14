@@ -13,13 +13,8 @@ import com.prova.repository.ProdutoRepository;
 @Controller
 public class ProdutoDAO {
 	
-	
-	ProdutoRepository repo;
-	
 	@Autowired
-	public ProdutoDAO(ProdutoRepository repo) {
-		this.repo = repo;
-	}
+	ProdutoRepository repo;
 	
 	public List<ProdutoEntity> findAll() {
 		return repo.findAll();
@@ -29,29 +24,21 @@ public class ProdutoDAO {
 		return repo.findById(id);
 	}
 	
-	public List<ProdutoEntity> findAll(Sort sort) {
-		return  repo.findAll(sort);
-	}	
-	
-	public List<ProdutoEntity> findAllById(Iterable<Long> ids) {
-		return repo.findAllById(ids);
-	}
-
-	
 	public <S extends ProdutoEntity> List<S> saveAll(Iterable<S> entities) {
 		return repo.saveAll(entities);
 	}
 
-	
 	public void flush() {
 		repo.flush();
 	}
+	public <S extends ProdutoEntity> S insert(S entity) {
+		return repo.saveAndFlush(entity);
+	}
 	
-	public <S extends ProdutoEntity> S saveAndFlush(S entity) {
+	public <S extends ProdutoEntity> S update(S entity) {
 		return repo.saveAndFlush(entity);
 	}
 
-		
 	public ProdutoEntity getOne(Long id) {
 		return repo.getOne(id);
 	}
@@ -59,11 +46,5 @@ public class ProdutoDAO {
 	public void deleteById(Long id) {
 		repo.deleteById(id);
 	}
-
-	
-	public void delete(ProdutoEntity entity) {
-		repo.delete(entity);
-
-	}	
 
 }

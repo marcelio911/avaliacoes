@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -20,7 +21,7 @@ import javax.validation.constraints.NotNull;
 public class ProdutoEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotNull(message = "O nome do produto é obrigatório")
@@ -31,12 +32,16 @@ public class ProdutoEntity {
 	@Column(name = "vl_produto")
 	private BigDecimal valor;
 	
-	@NotNull(message = "Por favor insira uma imagem para o produto")
+	// @NotNull(message = "Por favor insira uma imagem para o produto")
 	@Column(name = "im_miniatura_produto")
 	private String miniatura;
 		
 	@OneToMany(mappedBy = "produtoNoCarrinho", cascade = CascadeType.ALL)
-    private Set<CarrinhoComprasEntity> carrinho;
+	private Set<CarrinhoComprasEntity> carrinho;
+	
+	public ProdutoEntity(){
+		
+	}
 
     public ProdutoEntity(CarrinhoComprasEntity... carrinho) {
         this.carrinho = Stream.of(carrinho).collect(Collectors.toSet());

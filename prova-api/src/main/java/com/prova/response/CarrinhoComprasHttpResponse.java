@@ -13,25 +13,25 @@ import lombok.Setter;
 @ResponseBody()
 @Getter
 @Setter
-public class CarrinhoHttpResponse<T> extends CustomResponse {
+public class CarrinhoComprasHttpResponse<T> extends CustomResponse {
 
 	private T objeto;
 	private List<T> listaGenerica;
 
-	public CarrinhoHttpResponse(HttpEnum resposta, HttpStatus status) {
+	public CarrinhoComprasHttpResponse(HttpEnum resposta, HttpStatus status) {
 		super(resposta, status);
 	}
 	
-	public CarrinhoHttpResponse(String resposta, HttpStatus status) {
+	public CarrinhoComprasHttpResponse(String resposta, HttpStatus status) {
 		super(resposta, status);
 	}
 
-	public CarrinhoHttpResponse<T> build(T detalhes) {
+	public CarrinhoComprasHttpResponse<T> build(T detalhes) {
 		this.objeto = (T) detalhes ;
 		return this;
 	}
 	
-	public CarrinhoHttpResponse<T> build(List<T> listaGenerica) {
+	public CarrinhoComprasHttpResponse<T> build(List<T> listaGenerica) {
 		this.listaGenerica = listaGenerica ;
 		return this;
 	}
