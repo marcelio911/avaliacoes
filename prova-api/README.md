@@ -6,7 +6,7 @@
  mvn spring-boot:run
  ```
 #### Dados de acesso
-* [Acessar: http://localhost:2222/]
+* [Console H2: http://localhost:2222/h2-console]
 * [Usuário: user / 0fd02cd7-2ae1-497b-9a4c-7a5a15452a5e]
 
 
