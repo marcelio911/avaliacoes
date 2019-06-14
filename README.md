@@ -2,8 +2,36 @@
 ```
 git clone https://github.com/marcelio911/avaliacoes.git
 ```
+
+## Estrutura do projeto API
+
 ```
- cd avaliacoes/
+avaliacoes
+├── prova-api
+│   ├── src
+│   │   ├── main
+│   │   │   ├── java
+│   │   │   │   ├── com
+│   │   │   │   │   ├── prova
+│   │   │   │   │   │   ├── config
+│   │   │   │   │   │   ├── controller
+│   │   │   │   │   │   ├── dao
+│   │   │   │   │   │   ├── dto
+│   │   │   │   │   │   ├── entity
+│   │   │   │   │   │   ├── enums
+│   │   │   │   │   │   ├── exception
+│   │   │   │   │   │   ├── interface
+│   │   │   │   │   │   ├── repository
+│   │   │   │   │   │   ├── response
+│   │   │   │   │   │   ├── ProvaApplication.java
+│   │   │   ├── resources
+│   │   │   │   ├── application.properties
+│   │   │   │   ├── data.sql
+│   │   ├── test
+```
+
+```
+ cd avaliacoes/prova-api
 ```
 ```
  mvn clean install
@@ -15,15 +43,36 @@ git clone https://github.com/marcelio911/avaliacoes.git
 
 ## Dados de acesso
 * [Acessar: http://localhost:2222/]
-* [Usuário: user / 0fd02cd7-2ae1-497b-9a4c-7a5a15452a5e]
+    * [Acessar: http://localhost:2222/]
 
-## Execute Android
+
+## Estrutura do projeto FRONT-END
+```
+├── prova-frontend
+│   ├── android
+│   ├── assets
+│   ├── ios
+│   ├── node_modules
+│   ├── src
+│   │   ├── components
+│   │   ├── screens
+│   ├── __tests__
+│   ├── index.js
+│   ├── App.js
+│   ├── package.json
+
+## Execute Android App
 ```
 emulator list-avds
 ```
 ```
 emulator -avd "Seu_Device" --gpu system-libs --hardware
 ```
+
+```
+react-native start
+```
+
 ```
 react-native run-android
 ```
