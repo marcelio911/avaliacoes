@@ -19,7 +19,7 @@ export default props => {
     props.produto = {
         id: null,
         descricao: '',
-        valor: 0
+        valor: '0'
     }
 
     return (
@@ -28,7 +28,7 @@ export default props => {
                 {props.produto.descricao}
             </Text>
             <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>{props.produto.valor}</Text>
+                Preço: <Text style={styles.highlight}>{props.produto.valor}</Text>
             </Text>
         </View>
     )

@@ -29,20 +29,20 @@ export default class Carrinho extends React.PureComponent {
         dados: [ {
             "id": 10001,
             "descricao": "Calça",
-            "valor": 50.2,
-            "miniatura": images
+            "valor": "50.2",
+            "miniatura": images.produtoIcon
             },
               {
             "id": 10002,
             "descricao": "Tênis",
-            "valor": 145.65,
-            "miniatura": images
+            "valor": "145.65",
+            "miniatura": images.produtoIcon
             },
               {
             "id": 10003,
             "descricao": "Camisa",
-            "valor": 29.99,
-            "miniatura": images
+            "valor": "29.99",
+            "miniatura": images.produtoIcon
             }],
         error: '',
         visibleProdutos: [],
@@ -68,10 +68,6 @@ export default class Carrinho extends React.PureComponent {
         }
     }
 
-    componentWillMount() {
-        //this.loadProdutos() //Method for API call
-    }
-
     // exemplo:: https://medium.com/@ecavalcanti/react-native-consumindo-a-api-da-marvel-c444e0bc1c8a 
     async componentDidMount() {
         const response = await fetch(`${server}/api/produtos/listarTodos`, 
@@ -82,17 +78,19 @@ export default class Carrinho extends React.PureComponent {
             }, 
         })
         const responseJson = await response.json();
-        if (!responseJson.data) {
+        console.log("responseJsresponseJson.listaGenericaon:: ", JSON.stringify(responseJson.listaGenerica));
+        if (!responseJson.listaGenerica) {
             YellowBox.ignoreWarnings(['Informação: ...ainda não existem dados registrados']);
         }
-        this.setState({ data: responseJson.listaGenerica })
+        
+        this.setState({ loading: false, data: responseJson.listaGenerica });
+        // this.loadProdutos();
     }
 
     _renderItem = ({ item }) => {
         return (
             <TouchableOpacity onPress={() => this._onItemPress(item)} style={{ flexDirection: 'row', padding: 10, alignItems: 'center' }}>
-                <Image style={{ height: 50, width: 50, borderRadius: 25 }} source={item.miniatura} />
-                <Text style={{ marginLeft: 10 }}>{item.descricao}</Text>
+                <Image style={{ height: 120, width: 90, borderRadius: 25 }} source={item.miniatura} />
                 <Produto produto={item}></Produto>
             </TouchableOpacity>
         )
@@ -121,7 +119,7 @@ export default class Carrinho extends React.PureComponent {
             <FlatList
                 data={this.state.data}
                 renderItem={this._renderItem}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item, index) => index.toString()}
                 ItemSeparatorComponent={() =>
 
                     <View />
