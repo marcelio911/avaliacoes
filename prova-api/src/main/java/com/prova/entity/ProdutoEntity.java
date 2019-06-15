@@ -20,71 +20,69 @@ import javax.validation.constraints.NotNull;
 @Table(name = "tb_produto")
 public class ProdutoEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@NotNull(message = "O nome do produto é obrigatório")
-	@Column(name = "ds_produto")
-	private String descricao;
-	
-	@NotNull(message = "Por favor informar o valor do produto")
-	@Column(name = "vl_produto")
-	private BigDecimal valor;
-	
-	// @NotNull(message = "Por favor insira uma imagem para o produto")
-	@Column(name = "im_miniatura_produto")
-	private String miniatura;
-		
-	@OneToMany(mappedBy = "produtoNoCarrinho", cascade = CascadeType.ALL)
-	private Set<CarrinhoComprasEntity> carrinho;
-	
-	public ProdutoEntity(){
-		
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotNull(message = "O nome do produto é obrigatório")
+    @Column(name = "ds_produto")
+    private String descricao;
+
+    @NotNull(message = "Por favor informar o valor do produto")
+    @Column(name = "vl_produto")
+    private BigDecimal valor;
+
+    // @NotNull(message = "Por favor insira uma imagem para o produto")
+    @Column(name = "im_miniatura_produto")
+    private String miniatura;
+
+    @OneToMany(mappedBy = "produtoNoCarrinho", cascade = CascadeType.ALL)
+    private Set<CarrinhoComprasEntity> carrinho;
+
+    public ProdutoEntity() {
+
+    }
 
     public ProdutoEntity(CarrinhoComprasEntity... carrinho) {
         this.carrinho = Stream.of(carrinho).collect(Collectors.toSet());
         this.carrinho.forEach(x -> x.setProdutoNoCarrinho(this));
     }
-	
-	public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
 
-	public BigDecimal getValor() {
-		return valor;
-	}
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
-	public void setValor(BigDecimal valor) {
-		this.valor = valor;
-	}
-	
-	public String getMiniatura() {
-		return miniatura;
-	}
+    public BigDecimal getValor() {
+        return valor;
+    }
 
-	public void setMiniatura(String miniatura) {
-		this.miniatura = miniatura;
-	}
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
+    }
 
-	
+    public String getMiniatura() {
+        return miniatura;
+    }
 
-	@Override
-	public String toString() {
-		return "ProdutoEntity:: " + this.id + ", " + this.descricao + ", " + this.valor ;
-	}
-	
+    public void setMiniatura(String miniatura) {
+        this.miniatura = miniatura;
+    }
+
+    @Override
+    public String toString() {
+        return "ProdutoEntity:: " + this.id + ", " + this.descricao + ", " + this.valor;
+    }
+
 }

@@ -6,64 +6,64 @@ import java.util.List;
 
 import com.prova.entity.ProdutoEntity;
 
-public class ProdutoDTO implements BaseDTO<ProdutoEntity>{
+public class ProdutoDTO implements BaseDTO<ProdutoEntity> {
 
-	private Long id;
-	
-	private String descricao;
-	
-	private BigDecimal valor;
-	
-	public ProdutoDTO() {
-		// TODO Auto-generated constructor stub
-	}
+    private Long id;
 
-	public Long getId() {
-		return id;
-	}
+    private String descricao;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    private BigDecimal valor;
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public ProdutoDTO() {
+        // TODO Auto-generated constructor stub
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public BigDecimal getValor() {
-		return valor;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setValor(BigDecimal valor) {
-		this.valor = valor;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
 
-	@Override
-	public BaseDTO<ProdutoEntity> build(ProdutoEntity entidade) {
-		this.id = entidade.getId();
-		this.descricao = entidade.getDescricao();
-		this.valor = entidade.getValor();
-		return this;
-	}
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
-	@Override
-	public List<ProdutoDTO> createList(List<ProdutoEntity> listaEntity) {
-		List<ProdutoDTO> array = new ArrayList<ProdutoDTO>();
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
+    }
+
+    @Override
+    public BaseDTO<ProdutoEntity> build(ProdutoEntity entidade) {
+        this.id = entidade.getId();
+        this.descricao = entidade.getDescricao();
+        this.valor = entidade.getValor();
+        return this;
+    }
+
+    @Override
+    public List<ProdutoDTO> createList(List<ProdutoEntity> listaEntity) {
+        List<ProdutoDTO> array = new ArrayList<ProdutoDTO>();
         for (ProdutoEntity detalhes : listaEntity) {
-        	ProdutoDTO produtoDTO = new ProdutoDTO();
-        	produtoDTO.build(detalhes);
+            ProdutoDTO produtoDTO = new ProdutoDTO();
+            produtoDTO.build(detalhes);
             array.add(produtoDTO);
         }
         return array;
-	}
-	
-	@Override
-	public String toString() {
-		return "ProdutoEntity:: " + this.id + ", " + this.descricao + ", " + this.valor ;
-	}
-	
+    }
+
+    @Override
+    public String toString() {
+        return "ProdutoDTO:: " + this.id + ", " + this.descricao + ", " + this.valor;
+    }
+
 }

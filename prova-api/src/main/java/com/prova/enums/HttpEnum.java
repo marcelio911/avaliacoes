@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.prova.enums;
 
 /**
@@ -21,7 +16,7 @@ public enum HttpEnum {
      */
     MSG_ERRO_DADOS_INVALIDOS_MR0000("MR0000", "Dados inválidos."),
     MSG_ERRO_NENHUM_RESULTADO_MR0404("MR0404", "Nenhum resultado encontrado para esta consulta."),
-    MSG_ERRO_GENERICO_MR0500("MR0500", "Não foi possível continuar a executar esta operação");
+    MSG_ERRO_GENERICO_MR0500("MR0500", "Não foi possível continuar a executar esta operação... ");
     
 
     private final String codigo;
