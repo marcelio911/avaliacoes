@@ -17,18 +17,25 @@ import { name as appName } from '../../app.json';
 
 export default props => {
 
-    props.produto = {
+    props.cliente = {
         id: null,
-        descricao: '',
-        valor: '0'
+        nome: '',
+        email: '',
+        endereco: '',
+        telefone: '',
+        cpf: ''
     }
 
     return (
         <View style={styles.sectionContainer}>
             <Image style={{ height: 120, width: 90, borderRadius: 25 }} source={props.produto.miniatura} />
             <Text style={styles.sectionTitle}>
-                {props.produto.descricao}
+                CPF
             </Text>
+            <TextInput placeholder="Descrição" style={styles.input} 
+                onChangeText={descricao => this.setState({ descricao })}
+                value={this.state.descricao}
+                />
             <Text style={styles.sectionDescription}>
                 Preço: <Text style={styles.highlight}>{props.produto.valor}</Text>
             </Text>

@@ -14,11 +14,9 @@ import { name as appName } from '../../app.json';
 import { apiServer as server } from '../../app.json';
 import axios from 'axios';
 import images from '../../assets/static';
-
-//import ActionButton from 'react-native-action-button';
 //import AddProdutoModal from '../components/modals/AddProdutoModal';
 
-export default class Carrinho extends React.PureComponent {
+export default class VitrineScreen extends React.PureComponent {
 
     
     screens = 1;
@@ -48,7 +46,7 @@ export default class Carrinho extends React.PureComponent {
         visibleProdutos: [],
         showProdutos: true,
         addProdutoModal: false,
-        addCarrinhoModal: false,
+        addVitrineModal: false,
     }
 
     constructor(props) {
@@ -90,15 +88,15 @@ export default class Carrinho extends React.PureComponent {
     _renderItem = ({ item }) => {
         return (
             <TouchableOpacity onPress={() => this._onItemPress(item)} style={{ flexDirection: 'row', padding: 10, alignItems: 'center' }}>
-                <Image style={{ height: 120, width: 90, borderRadius: 25 }} source={item.miniatura} />
                 <Produto produto={item}></Produto>
             </TouchableOpacity>
         )
     }
 
     _onItemPress = (item) => {
-        this.state.addCarrinhoModal = true;
-        this.props.navigation.navigate('AddProdutoModal', { produto: item , isVisible: true})
+        this.state.addVitrineModal = true;
+        const {navigate} = this.props.navigation;
+        navigate('AddProdutoModal', { produto: item , isVisible: true})
     }
 
     handleLoadMore = () => {
@@ -117,7 +115,7 @@ export default class Carrinho extends React.PureComponent {
         }
         return (
             <FlatList
-                data={this.state.data}
+                data={this.state.dados}
                 renderItem={this._renderItem}
                 keyExtractor={(item, index) => index.toString()}
                 ItemSeparatorComponent={() =>
@@ -130,4 +128,4 @@ export default class Carrinho extends React.PureComponent {
     }
 }
 
-AppRegistry.registerComponent(appName, () => Carrinho);
+AppRegistry.registerComponent(appName, () => VitrineScreen);

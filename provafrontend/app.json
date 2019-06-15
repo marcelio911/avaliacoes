@@ -1,5 +1,5 @@
 {
   "name": "provafrontend",
   "displayName": "provafrontend",
-  "apiServer": "http://192.168.10.234:2222"
+  "apiServer": "http://192.168.1.106:2222"
 }

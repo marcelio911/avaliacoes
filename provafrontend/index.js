@@ -3,8 +3,8 @@
  */
 
 import {AppRegistry} from 'react-native';
-// import App from './src/MainNavigator';
-import App from './App';
+import createDrawerNavigator as App from './src/MainNavigator';
+// import App from './App';
 import {name as appName} from './app.json';
 
 AppRegistry.registerComponent(appName, () => App);
