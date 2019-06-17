@@ -7,7 +7,8 @@ import {
     View,
     AppRegistry,
     ActivityIndicator,
-    Image
+    Image,
+    Alert
 } from 'react-native';
 import { YellowBox } from 'react-native';
 import Produto from '../components/Produto';
@@ -88,6 +89,7 @@ export default class VitrineScreen extends React.PureComponent {
         return (
             <TouchableOpacity onPress={() => this._onItemPress(item)} style={{ flexDirection: 'row', padding: 10, alignItems: 'center' }}>
                 {/*<Image style={{ height: 50, width: 50, borderRadius: 25 }} source={ item.miniatura } />*/}
+                <Image style={{ height: 50, width: 50, borderRadius: 25 }} source={ images.produtoIcon } />
                 <Produto produto={item}></Produto>
                 <Button style={styles.btn} title="+" onPress={() => this._onItemPress(item)} />
             </TouchableOpacity> 
@@ -96,7 +98,7 @@ export default class VitrineScreen extends React.PureComponent {
 
     _onItemPress = (item) => {
         if (this.state.clienteSessao) {
-            this.setState({...data, showClienteModal: false, showCarrinhoComprasModal: true});
+            this.setState({showClienteModal: false, showCarrinhoComprasModal: true});
             this._irPara();
         } else {
             this.setState({ showClienteModal: true, showCarrinhoComprasModal: false });
@@ -118,6 +120,8 @@ export default class VitrineScreen extends React.PureComponent {
         if (this.state.clienteSessao) {
             const { navigate } = this.props.navigation;
             navigate('CarrinhoScreen', { clienteSessao: this.state.clienteSessao, isVisible: true })
+        } else {
+            this.setState({ showClienteModal: true, showCarrinhoComprasModal: false })
         }
     }
 

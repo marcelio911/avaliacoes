@@ -14,6 +14,10 @@ const initialState = {
     usuario: null,
     isVisible: false,
     text: '',
+    query: {
+        telefone: '',
+        cpf: ''
+    },
     clientes: []
 }
 
@@ -45,11 +49,15 @@ export default class ProcurarUsuario extends Component {
         }
     }
 
+    async componentDidMount() {
+        await this.load();
+    }
+
 
     procurar = () => {
-        const data = { ...this.state };
+        const data = { ...this.state.clientes };
         this.props.onSave(data);
-        this.setState({ ...initialState }); //usar redux para devolver o usuario para sessao
+        this.setState({ ...initialState }); 
     }
 
     _filterData = async (query) => {
@@ -57,7 +65,7 @@ export default class ProcurarUsuario extends Component {
     }
 
     render() {
-        const { query } = this.state;
+        const { query } = this.state.query;
         const data = this._filterData(query);
 
         return (
