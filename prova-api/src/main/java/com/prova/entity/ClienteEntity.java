@@ -6,12 +6,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -33,18 +37,16 @@ public class ClienteEntity implements BaseEntity<ClienteDTO>, Serializable {
     @Column(name = "ct_endereco", nullable = true)
     private String endereco;
 
-    @Max(value = 15, message = "Este não é um número válido")
     @Column(name = "ct_telefone")
     private String telefone;
     
-    @Max(value = 13, message = "Este CPF é inválido")
     @Column(name = "dp_cliente")
     private String cpf;
 
-//    @OneToOne(
-//            fetch = FetchType.EAGER,
-//            mappedBy = "clienteNoCarrinho", cascade = CascadeType.ALL)
-//    private CarrinhoComprasEntity carrinhoDoCliente;
+    @OneToOne(
+            fetch = FetchType.EAGER,
+            mappedBy = "clienteNoCarrinho", cascade = CascadeType.ALL)
+    private CarrinhoComprasEntity carrinhoDoCliente;
 
     public ClienteEntity() {
         // TODO Auto-generated constructor stub
@@ -98,18 +100,18 @@ public class ClienteEntity implements BaseEntity<ClienteDTO>, Serializable {
         this.cpf = cpf;
     }
 
-//    public CarrinhoComprasEntity getCarrinhoDoCliente() {
-//        return carrinhoDoCliente;
-//    }
-//
-//    public void setCarrinhoDoCliente(CarrinhoComprasEntity carrinhoDoCliente) {
-//        this.carrinhoDoCliente = carrinhoDoCliente;
-//    }
+    public CarrinhoComprasEntity getCarrinhoDoCliente() {
+        return carrinhoDoCliente;
+    }
+
+    public void setCarrinhoDoCliente(CarrinhoComprasEntity carrinhoDoCliente) {
+        this.carrinhoDoCliente = carrinhoDoCliente;
+    }
 
     @Override
     public String toString() {
-        return "";
-//        return "ClienteEntity:: " + this.id + ", " + this.nome + ", " + this.carrinhoDoCliente;
+//        return "";
+        return "ClienteEntity:: " + this.id + ", " + this.nome + ", " + this.carrinhoDoCliente;
     }
 
     @Override

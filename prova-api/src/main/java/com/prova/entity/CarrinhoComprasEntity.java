@@ -31,10 +31,10 @@ public class CarrinhoComprasEntity implements BaseEntity<CarrinhoComprasDTO>, Se
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//
-//    @OneToOne(mappedBy = "carrinhoDoCliente", fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
-//    @JoinColumn(name = "id_cliente_no_carrinho", nullable = false)
-//    private ClienteEntity clienteNoCarrinho;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "id_cliente_no_carrinho", nullable = false)
+    private ClienteEntity clienteNoCarrinho;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "items_carrinho",
@@ -59,13 +59,13 @@ public class CarrinhoComprasEntity implements BaseEntity<CarrinhoComprasDTO>, Se
         this.id = id;
     }
 
-//    public ClienteEntity getClienteNoCarrinho() {
-//        return clienteNoCarrinho;
-//    }
-//
-//    public void setClienteNoCarrinho(ClienteEntity clienteNoCarrinho) {
-//        this.clienteNoCarrinho = clienteNoCarrinho;
-//    }
+    public ClienteEntity getClienteNoCarrinho() {
+        return clienteNoCarrinho;
+    }
+
+    public void setClienteNoCarrinho(ClienteEntity clienteNoCarrinho) {
+        this.clienteNoCarrinho = clienteNoCarrinho;
+    }
 
     public Set<ItensCarrinhoEntity> getItemsNoCarrinho() {
         return itemsNoCarrinho;
@@ -78,7 +78,7 @@ public class CarrinhoComprasEntity implements BaseEntity<CarrinhoComprasDTO>, Se
     @Override
     public CarrinhoComprasEntity build(CarrinhoComprasDTO dto) {
         this.id = dto.getId();
-//        this.clienteNoCarrinho = new ClienteEntity().build(dto.getClienteNoCarrinho());
+        this.clienteNoCarrinho = new ClienteEntity().build(dto.getClienteNoCarrinho());
         // TODO Implementar
 //        this.itemsNoCarrinho = new ProdutoEntity().createList(dto.getItems());
         return this;
@@ -106,8 +106,8 @@ public class CarrinhoComprasEntity implements BaseEntity<CarrinhoComprasDTO>, Se
 
     @Override
     public String toString() {
-        return "";
-//        return "CarrinhoComprasEntity:: " + this.id + ", " + this.clienteNoCarrinho + ", " + this.itemsNoCarrinho;
+//        return "";
+        return "CarrinhoComprasEntity:: " + this.id + ", " + this.clienteNoCarrinho + ", " + this.itemsNoCarrinho;
     }
 
 }

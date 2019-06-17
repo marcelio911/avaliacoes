@@ -8,6 +8,7 @@ import {
 import React, { Component } from 'react';
 import { name as appName } from './../../../app.json';
 import Autocomplete from 'react-native-autocomplete-input';
+import HeaderCustom from '../HeaderCustom.js';
 
 const initialState = {
     usuario: null,
@@ -19,6 +20,29 @@ const initialState = {
 export default class ProcurarUsuario extends Component {
     state = { 
         ...initialState
+    }
+
+    load = async () => {
+        try {
+            const response = await fetch(`${server}/api/cliente/listarTodos`,
+                {
+                    method: 'GET',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                })
+            const responseJson = await response.json();
+            console.log("responseJsresponseJson.listaGenericaon:: ", JSON.stringify(responseJson.listaGenerica));
+            if (!responseJson.listaGenerica) {
+                YellowBox.ignoreWarnings(['Informação: ...ainda não existem dados registrados']);
+            }
+
+            this.setState({ loading: false, clientes: responseJson.listaGenerica });
+        } catch (err) {
+            // showError(err);            
+            YellowBox.ignoreWarnings([`Informação: ...ainda não existem dados registrados ${err}`]);
+        }
     }
 
 
@@ -40,6 +64,7 @@ export default class ProcurarUsuario extends Component {
             <Modal onRequestClose={this.props.onCancel}
                 visible={this.props.isVisible}
                 animationType='slide' transparent={true}>
+                <HeaderCustom title="Pesquisar cliente: CPF, Telefone" /> 
                 <Autocomplete
                     data={this.state.clientes}
                     defaultValue={query}

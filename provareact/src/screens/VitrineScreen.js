@@ -87,7 +87,7 @@ export default class VitrineScreen extends React.PureComponent {
     _renderItem = ({ item }) => {
         return (
             <TouchableOpacity onPress={() => this._onItemPress(item)} style={{ flexDirection: 'row', padding: 10, alignItems: 'center' }}>
-                <Image style={{ height: 50, width: 50, borderRadius: 25 }} source={ item.miniatura } />
+                {/*<Image style={{ height: 50, width: 50, borderRadius: 25 }} source={ item.miniatura } />*/}
                 <Produto produto={item}></Produto>
                 <Button style={styles.btn} title="+" onPress={() => this._onItemPress(item)} />
             </TouchableOpacity> 
@@ -96,12 +96,10 @@ export default class VitrineScreen extends React.PureComponent {
 
     _onItemPress = (item) => {
         if (this.state.clienteSessao) {
-            this.state.showClienteModal = false;
-            this.state.showCarrinhoComprasModal = true;
+            this.setState({...data, showClienteModal: false, showCarrinhoComprasModal: true});
             this._irPara();
         } else {
-            this.state.showCarrinhoComprasModal = false;
-            this.state.showClienteModal = true;
+            this.setState({ showClienteModal: true, showCarrinhoComprasModal: false });
         }
         this.state.produtoSelecionado = item;
         console.log("_onItemPress:: ", JSON.stringify(this.state));
@@ -116,6 +114,7 @@ export default class VitrineScreen extends React.PureComponent {
     };
 
     _irPara = () => {
+        console.log("_irPara");
         if (this.state.clienteSessao) {
             const { navigate } = this.props.navigation;
             navigate('CarrinhoScreen', { clienteSessao: this.state.clienteSessao, isVisible: true })
@@ -145,7 +144,7 @@ export default class VitrineScreen extends React.PureComponent {
             return (
                 <View>
                     <FlatList
-                        data={this.state.dados}
+                        data={this.state.data}
                         renderItem={this._renderItem}
                         keyExtractor={(item, index) => index.toString()}
 
