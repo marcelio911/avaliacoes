@@ -71,7 +71,7 @@ public class ClienteController {
         }
     }
 
-    @RequestMapping(value = "/obterPorTelCpf/{id}", method = RequestMethod.GET)
+    @PostMapping(value = "/obterPorTelCpf/{filter}", produces = "application/json")
     public ClienteHttpResponse<ClienteDTO> obterPorTelCpf(@RequestBody @Valid ClienteFilterDTO filter) {
         Optional<ClienteEntity> detalhes = dao.findByTelCpf(filter);
         ClienteHttpResponse<ClienteDTO> response = new ClienteHttpResponse<ClienteDTO>(

@@ -15,6 +15,8 @@ public class ProdutoDTO implements BaseDTO<ProdutoEntity> {
 
     private BigDecimal valor;
 
+    private String miniatura;
+
     public ProdutoDTO() {
         // TODO Auto-generated constructor stub
     }
@@ -43,11 +45,20 @@ public class ProdutoDTO implements BaseDTO<ProdutoEntity> {
         this.valor = valor;
     }
 
+    public String getMiniatura() {
+        return miniatura;
+    }
+
+    public void setMiniatura(String miniatura) {
+        this.miniatura = miniatura;
+    }
+    
     @Override
     public ProdutoDTO build(ProdutoEntity entidade) {
         this.id = entidade.getId();
         this.descricao = entidade.getDescricao();
         this.valor = entidade.getValor();
+        this.miniatura = entidade.getMiniatura();
         return this;
     }
 

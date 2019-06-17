@@ -7,14 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -30,17 +27,17 @@ public class ClienteEntity implements BaseEntity<ClienteDTO>, Serializable {
     @Column(name = "nm_cliente")
     private String nome;
 
-    @Min(value = 5)
     @Column(name = "ct_email")
     private String email;
 
-    @Column(name = "ct_endereco")
+    @Column(name = "ct_endereco", nullable = true)
     private String endereco;
 
-    @Max(value = 15)
+    @Max(value = 15, message = "Este não é um número válido")
     @Column(name = "ct_telefone")
     private String telefone;
-
+    
+    @Max(value = 11, message = "Este CPF é inválido")
     @Column(name = "dp_cliente")
     private String cpf;
 

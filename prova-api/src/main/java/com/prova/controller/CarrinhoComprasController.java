@@ -62,10 +62,10 @@ public class CarrinhoComprasController {
         }
     }
 
-    @RequestMapping(value = "/validarProduto/{id}", method = RequestMethod.GET)
-    public CarrinhoComprasHttpResponse<CarrinhoComprasDTO> validarProduto(@RequestBody @Valid ItemCarrinhoDTO obj) {
-        Optional<CarrinhoComprasEntity> produto = dao.validarProduto(obj);
-        Optional<CarrinhoComprasEntity> detalhes = dao.findByIdCliente(obj.getIdCliente());
+    @PostMapping(value = "/validarProduto/{objeto}", produces = "application/json")
+    public CarrinhoComprasHttpResponse<CarrinhoComprasDTO> validarProduto(@RequestBody @Valid ItemCarrinhoDTO objeto) {
+        Optional<CarrinhoComprasEntity> produto = dao.validarProduto(objeto);
+        Optional<CarrinhoComprasEntity> detalhes = dao.findByIdCliente(objeto.getIdCliente());
         CarrinhoComprasHttpResponse<CarrinhoComprasDTO> response = new CarrinhoComprasHttpResponse<CarrinhoComprasDTO>(
                 HttpEnum.MSG_SUCESSO_OPERACAO_GENERICA, HttpStatus.ACCEPTED);
         if (!produto.isPresent()) {
