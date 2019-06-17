@@ -47,7 +47,7 @@ avaliacoes
 ## Estrutura do projeto FRONT-END
 ```
 avaliacoes
-├── provafrontend
+├── provareact
 │   ├── android
 │   ├── assets
 │   ├── ios
@@ -65,10 +65,7 @@ avaliacoes
 ```
 npm install
 ```
-```
-chmod 755 android/gradlew
-```
-### Resolvendo problemas se for Linux Ubuntu
+### Resolvendo problemas caso SO Linux Ubuntu
 ```
 chmod 755 android/gradlew
 ```

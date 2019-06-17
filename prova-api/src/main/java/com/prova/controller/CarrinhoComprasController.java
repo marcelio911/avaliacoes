@@ -1,6 +1,5 @@
 package com.prova.controller;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -13,17 +12,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.prova.dao.CarrinhoComprasDAO;
 import com.prova.dto.CarrinhoComprasDTO;
+import com.prova.dto.ItemCarrinhoDTO;
 import com.prova.entity.CarrinhoComprasEntity;
+import com.prova.entity.ItensCarrinhoEntity;
 import com.prova.enums.HttpEnum;
-import com.prova.exception.ResourceExceptionGeneric;
+import com.prova.exception.CarrinhoComprasNotFoundException;
 import com.prova.response.CarrinhoComprasHttpResponse;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import lombok.extern.slf4j.Slf4j;
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 /**
  *
@@ -38,55 +43,66 @@ public class CarrinhoComprasController {
     @Autowired
     private CarrinhoComprasDAO dao;
 
-    // 	private static final Logger logger = LoggerFactory.getLogger(CarrinhoComprasController.class);
-    @PostMapping(value = "/salvar", produces = "application/json")
-    public CarrinhoComprasHttpResponse<CarrinhoComprasDTO> salvar(@RequestBody @Valid CarrinhoComprasEntity obj) throws Exception {
+    @PostMapping(value = "/add", produces = "application/json")
+    public CarrinhoComprasHttpResponse<CarrinhoComprasDTO> add(@RequestBody @Valid ItemCarrinhoDTO item) throws Exception {
         try {
-            CarrinhoComprasEntity saved = dao.insert(obj);
-            CarrinhoComprasDTO produtoDTO = new CarrinhoComprasDTO();
-            produtoDTO.build(saved);
+            CarrinhoComprasEntity saved = dao.add(item);
+            Set<ItemCarrinhoDTO> items = new HashSet<ItemCarrinhoDTO>();
+            for (ItemCarrinhoDTO item1 : items) {
+                ItemCarrinhoDTO dto = new ItemCarrinhoDTO(item1);
+                items.add(dto);
+            }            
             CarrinhoComprasHttpResponse<CarrinhoComprasDTO> response = new CarrinhoComprasHttpResponse<CarrinhoComprasDTO>(
                     HttpEnum.MSG_SUCESSO_OPERACAO_GENERICA, HttpStatus.ACCEPTED);
-            return response.build(produtoDTO);
-        } catch (Exception ex){
-            return new CarrinhoComprasHttpResponse<CarrinhoComprasDTO>( HttpEnum.MSG_ERRO_GENERICO_MR0500
+            return response.createList(items);
+        } catch (Exception ex) {
+            return new CarrinhoComprasHttpResponse<CarrinhoComprasDTO>(HttpEnum.MSG_ERRO_GENERICO_MR0500
                     + ex.getMessage(),
-					HttpStatus.BAD_REQUEST);
+                    HttpStatus.BAD_REQUEST);
         }
     }
 
-    @RequestMapping(value = "/obterPorId/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/validarProduto/{id}", method = RequestMethod.GET)
+    public CarrinhoComprasHttpResponse<CarrinhoComprasDTO> validarProduto(@RequestBody @Valid ItemCarrinhoDTO obj) {
+        Optional<CarrinhoComprasEntity> produto = dao.validarProduto(obj);
+        Optional<CarrinhoComprasEntity> detalhes = dao.findByIdCliente(obj.getIdCliente());
+        CarrinhoComprasHttpResponse<CarrinhoComprasDTO> response = new CarrinhoComprasHttpResponse<CarrinhoComprasDTO>(
+                HttpEnum.MSG_SUCESSO_OPERACAO_GENERICA, HttpStatus.ACCEPTED);
+        if (!produto.isPresent()) {
+            return new CarrinhoComprasHttpResponse<CarrinhoComprasDTO>(HttpEnum.MSG_ERRO_NENHUM_RESULTADO_MR0404, HttpStatus.BAD_REQUEST);
+        } else {
+            Set<ItensCarrinhoEntity> items = detalhes.get().getItemsNoCarrinho();
+            for (ItensCarrinhoEntity item1 : items) {
+                ItemCarrinhoDTO dto = new ItemCarrinhoDTO().build(item1);
+//                items.add(dto);
+            }           
+            return response.createList(new ItemCarrinhoDTO().createList(detalhes.get().getItemsNoCarrinho()));
+
+        }
+
+    }
+    @RequestMapping(value = "/obterPorIdCliente/{id}", method = RequestMethod.GET)
     public CarrinhoComprasHttpResponse<CarrinhoComprasDTO> obterPorId(@PathVariable Long id) {
-        Optional<CarrinhoComprasEntity> detalhes = dao.findById(id);
+        Optional<CarrinhoComprasEntity> detalhes = dao.findByIdCliente(id);
         CarrinhoComprasHttpResponse<CarrinhoComprasDTO> response = new CarrinhoComprasHttpResponse<CarrinhoComprasDTO>(
                 HttpEnum.MSG_SUCESSO_OPERACAO_GENERICA, HttpStatus.ACCEPTED);
         if (Objects.isNull(detalhes)) {
             return new CarrinhoComprasHttpResponse<CarrinhoComprasDTO>(HttpEnum.MSG_ERRO_NENHUM_RESULTADO_MR0404, HttpStatus.BAD_REQUEST);
-            // return detalhes.orElseThrow(() -> new CarrinhoComprasNotFoundException());
         } else {
-            CarrinhoComprasDTO produtoDTO = new CarrinhoComprasDTO();
-            produtoDTO.build(detalhes.get());
-            if (Objects.nonNull(produtoDTO)) {
-                return response.build(produtoDTO);
-            }
-            produtoDTO.build(detalhes.orElseThrow(() -> new CarrinhoComprasNotFoundException()));
-            return response.build(produtoDTO);
+            CarrinhoComprasDTO dto = new CarrinhoComprasDTO();
+            
+            dto.build(detalhes.orElseThrow(() -> new CarrinhoComprasNotFoundException(HttpEnum.MSG_ERRO_NENHUM_RESULTADO_MR0404)));
+            return response.createList(new ItemCarrinhoDTO().createList(detalhes.get().getItemsNoCarrinho()));
         }
 
     }
 
-    @RequestMapping(value = "/removerPorId/{id}", method = RequestMethod.DELETE)
-    public CarrinhoComprasHttpResponse<CarrinhoComprasDTO> delete(@PathVariable Long id) {
-        dao.deleteById(id);
+    @RequestMapping(value = "/removerItemPorIdCliente/{item}", method = RequestMethod.DELETE)
+    public CarrinhoComprasHttpResponse<CarrinhoComprasDTO> delete(@RequestBody @Valid ItemCarrinhoDTO item) {
+        Optional<CarrinhoComprasEntity> carrinho = dao.findByIdCliente(item.getIdCliente());
+        carrinho.orElseThrow(() -> new CarrinhoComprasNotFoundException());
+        dao.delete(carrinho.get());
         return new CarrinhoComprasHttpResponse<CarrinhoComprasDTO>(HttpEnum.MSG_SUCESSO_DELETE, HttpStatus.ACCEPTED);
-    }
-
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    static class CarrinhoComprasNotFoundException extends ResourceExceptionGeneric {
-
-        CarrinhoComprasNotFoundException() {
-            super(HttpEnum.MSG_ERRO_NENHUM_RESULTADO_MR0404, HttpStatus.BAD_REQUEST);
-        }
     }
 
 }

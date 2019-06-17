@@ -31,45 +31,45 @@ prova-api/.vscode/
 
 
 ##Frontend
-provafrontend/.vscode/
+provareact/.vscode/
 # OSX
 #
-provafrontend/.DS_Store
+provareact/.DS_Store
 
 # Xcode
 #
-provafrontend/build/
-provafrontend/*.pbxuser
-provafrontend/!default.pbxuser
-provafrontend/*.mode1v3
-provafrontend/!default.mode1v3
-provafrontend/*.mode2v3
-provafrontend/!default.mode2v3
-provafrontend/*.perspectivev3
-provafrontend/!default.perspectivev3
-provafrontend/xcuserdata
-provafrontend/*.xccheckout
-provafrontend/*.moved-aside
-provafrontend/DerivedData
-provafrontend/*.hmap
-provafrontend/*.ipa
-provafrontend/*.xcuserstate
-provafrontend/project.xcworkspace
+provareact/build/
+provareact/*.pbxuser
+provareact/!default.pbxuser
+provareact/*.mode1v3
+provareact/!default.mode1v3
+provareact/*.mode2v3
+provareact/!default.mode2v3
+provareact/*.perspectivev3
+provareact/!default.perspectivev3
+provareact/xcuserdata
+provareact/*.xccheckout
+provareact/*.moved-aside
+provareact/DerivedData
+provareact/*.hmap
+provareact/*.ipa
+provareact/*.xcuserstate
+provareact/project.xcworkspace
 
 # Android/IntelliJ
 #
-provafrontend/build/
-provafrontend/.idea
-provafrontend/.gradle
-provafrontend/local.properties
-provafrontend/*.iml
+provareact/build/
+provareact/.idea
+provareact/.gradle
+provareact/local.properties
+provareact/*.iml
 
 # node.js
 #
 */node_modules
-provafrontend/node_modules/
-provafrontend/npm-debug.log
-provafrontend/yarn-error.log
+provareact/node_modules/
+provareact/npm-debug.log
+provareact/yarn-error.log
 
 # BUCK
 buck-out/

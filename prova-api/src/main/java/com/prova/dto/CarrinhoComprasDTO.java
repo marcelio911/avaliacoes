@@ -1,19 +1,19 @@
 package com.prova.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.prova.entity.CarrinhoComprasEntity;
-import com.prova.entity.ProdutoEntity;
-import com.prova.entity.ClienteEntity;
+import com.prova.interfaces.BaseDTO;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class CarrinhoComprasDTO implements BaseDTO<CarrinhoComprasEntity> {
 
     private Long id;
 
-    private ClienteEntity clienteNoCarrinho;
+    private ClienteDTO clienteNoCarrinho;
 
-    private ProdutoEntity produtoNoCarrinho;
+    private List<ItemCarrinhoDTO> itemsNoCarrinho;
 
     public CarrinhoComprasDTO() {
         // TODO Auto-generated constructor stub
@@ -27,27 +27,26 @@ public class CarrinhoComprasDTO implements BaseDTO<CarrinhoComprasEntity> {
         this.id = id;
     }
 
-    public ClienteEntity getClienteNoCarrinho() {
+    public ClienteDTO getClienteNoCarrinho() {
         return clienteNoCarrinho;
     }
 
-    public void setClienteNoCarrinho(ClienteEntity clienteNoCarrinho) {
+    public void setClienteNoCarrinho(ClienteDTO clienteNoCarrinho) {
         this.clienteNoCarrinho = clienteNoCarrinho;
     }
 
-    public ProdutoEntity getProdutoNoCarrinho() {
-        return produtoNoCarrinho;
+    public List<ItemCarrinhoDTO> getItemsNoCarrinho() {
+        return itemsNoCarrinho;
     }
 
-    public void setProdutoNoCarrinho(ProdutoEntity produtoNoCarrinho) {
-        this.produtoNoCarrinho = produtoNoCarrinho;
+    public void setItemsNoCarrinho(List<ItemCarrinhoDTO> itemsNoCarrinho) {
+        this.itemsNoCarrinho = itemsNoCarrinho;
     }
 
     @Override
-    public BaseDTO<CarrinhoComprasEntity> build(CarrinhoComprasEntity entidade) {
+    public CarrinhoComprasDTO build(CarrinhoComprasEntity entidade) {
         this.id = entidade.getId();
-        this.produtoNoCarrinho = entidade.getProdutoNoCarrinho();
-        this.clienteNoCarrinho = entidade.getClienteNoCarrinho();
+//        this.clienteNoCarrinho = new ClienteDTO().build(entidade.getClienteNoCarrinho());
         return this;
     }
 
@@ -62,9 +61,19 @@ public class CarrinhoComprasDTO implements BaseDTO<CarrinhoComprasEntity> {
         return array;
     }
 
+    public Set<CarrinhoComprasDTO> createList(Set<CarrinhoComprasEntity> listaEntity) {
+        Set<CarrinhoComprasDTO> array = new HashSet<CarrinhoComprasDTO>();
+        for (CarrinhoComprasEntity detalhes : listaEntity) {
+            CarrinhoComprasDTO carrinhoDTO = new CarrinhoComprasDTO();
+            carrinhoDTO.build(detalhes);
+            array.add(carrinhoDTO);
+        }
+        return array;
+    }
+
     @Override
     public String toString() {
-        return "CarrinhoComprasDTO:: " + this.id + ", " + this.clienteNoCarrinho + ", " + this.produtoNoCarrinho;
+        return "CarrinhoComprasDTO:: " + this.id + ", " + this.clienteNoCarrinho + ", " + this.itemsNoCarrinho;
     }
 
 }

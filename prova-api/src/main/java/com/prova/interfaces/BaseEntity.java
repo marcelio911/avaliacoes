@@ -2,15 +2,14 @@ package com.prova.interfaces;
 
 import java.util.List;
 
-import com.prova.dto.BaseDTO;
 
 /**
  *
  * @author marcelio
  */
-public interface BaseEntity {
+public interface BaseEntity<T> {
 	
-	public BaseDTO objeto(BaseEntity entidade);
+	public BaseEntity build(T dto);
     
-	public List<BaseDTO> lista(List<BaseEntity> listaEntity);
+	public List<?> createList(List<T> listaDto);
 }

@@ -15,6 +15,8 @@ public enum HttpEnum {
      * mensagens de erro
      */
     MSG_ERRO_DADOS_INVALIDOS_MR0000("MR0000", "Dados inválidos."),
+    MSG_ERRO_CARRINHO_VAZIO_MR0500("MR0500", "O carrinho está vazio."),
+    MSG_ERRO_PRODUTO_ADD_CARRINHO_MR0500("MR0500", "Este produto já foi adicionado ao carrinho."),
     MSG_ERRO_NENHUM_RESULTADO_MR0404("MR0404", "Nenhum resultado encontrado para esta consulta."),
     MSG_ERRO_GENERICO_MR0500("MR0500", "Não foi possível continuar a executar esta operação... ");
     

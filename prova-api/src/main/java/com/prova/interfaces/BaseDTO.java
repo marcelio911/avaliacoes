@@ -1,4 +1,4 @@
-package com.prova.dto;
+package com.prova.interfaces;
 
 import java.util.List;
 

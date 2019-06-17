@@ -1,5 +1,6 @@
 package com.prova.dto;
 
+import com.prova.interfaces.BaseDTO;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,7 @@ public class ProdutoDTO implements BaseDTO<ProdutoEntity> {
     }
 
     @Override
-    public BaseDTO<ProdutoEntity> build(ProdutoEntity entidade) {
+    public ProdutoDTO build(ProdutoEntity entidade) {
         this.id = entidade.getId();
         this.descricao = entidade.getDescricao();
         this.valor = entidade.getValor();

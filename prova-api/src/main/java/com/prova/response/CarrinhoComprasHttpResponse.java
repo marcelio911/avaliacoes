@@ -1,11 +1,13 @@
 package com.prova.response;
 
+import com.prova.dto.ItemCarrinhoDTO;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.prova.enums.HttpEnum;
+import java.util.Set;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,8 +17,8 @@ import lombok.Setter;
 @Setter
 public class CarrinhoComprasHttpResponse<T> extends CustomResponse {
 
-	private T objeto;
-	private List<T> listaGenerica;
+	private boolean adicionado;
+	private Set<ItemCarrinhoDTO> listaGenerica;
 
 	public CarrinhoComprasHttpResponse(HttpEnum resposta, HttpStatus status) {
 		super(resposta, status);
@@ -26,21 +28,21 @@ public class CarrinhoComprasHttpResponse<T> extends CustomResponse {
 		super(resposta, status);
 	}
 
-	public CarrinhoComprasHttpResponse<T> build(T detalhes) {
-		this.objeto = (T) detalhes ;
+	public CarrinhoComprasHttpResponse<T> build(boolean detalhes) {
+		this.adicionado = detalhes ;
 		return this;
 	}
 	
-	public CarrinhoComprasHttpResponse<T> build(List<T> listaGenerica) {
+	public CarrinhoComprasHttpResponse<T> createList(Set<ItemCarrinhoDTO> listaGenerica) {
 		this.listaGenerica = listaGenerica ;
 		return this;
 	}
 
-	public T getObjeto() {
-		return objeto;
+	public boolean getAdicionado() {
+		return adicionado;
 	}
 	
-	public List<T> getListaGenerica() {
+	public Set<ItemCarrinhoDTO> getListaGenerica() {
 		return listaGenerica;
 	}
 	

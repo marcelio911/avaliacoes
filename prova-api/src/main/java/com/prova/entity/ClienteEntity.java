@@ -1,23 +1,27 @@
 package com.prova.entity;
 
+import com.prova.dto.ClienteDTO;
+import com.prova.interfaces.BaseEntity;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "tb_cliente")
-public class ClienteEntity {
+public class ClienteEntity implements BaseEntity<ClienteDTO>, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,16 +44,13 @@ public class ClienteEntity {
     @Column(name = "dp_cliente")
     private String cpf;
 
-    @OneToMany(mappedBy = "clienteNoCarrinho", cascade = CascadeType.ALL)
-    private Set<CarrinhoComprasEntity> carrinhoDoCliente;
+//    @OneToOne(
+//            fetch = FetchType.EAGER,
+//            mappedBy = "clienteNoCarrinho", cascade = CascadeType.ALL)
+//    private CarrinhoComprasEntity carrinhoDoCliente;
 
     public ClienteEntity() {
         // TODO Auto-generated constructor stub
-    }
-
-    public ClienteEntity(CarrinhoComprasEntity... carrinho) {
-        this.carrinhoDoCliente = Stream.of(carrinho).collect(Collectors.toSet());
-        this.carrinhoDoCliente.forEach(x -> x.setClienteNoCarrinho(this));
     }
 
     public Long getId() {
@@ -100,17 +101,50 @@ public class ClienteEntity {
         this.cpf = cpf;
     }
 
-    public Set<CarrinhoComprasEntity> getCarrinhoDoCliente() {
-        return carrinhoDoCliente;
-    }
-
-    public void setCarrinhoDoCliente(Set<CarrinhoComprasEntity> carrinhoDoCliente) {
-        this.carrinhoDoCliente = carrinhoDoCliente;
-    }
+//    public CarrinhoComprasEntity getCarrinhoDoCliente() {
+//        return carrinhoDoCliente;
+//    }
+//
+//    public void setCarrinhoDoCliente(CarrinhoComprasEntity carrinhoDoCliente) {
+//        this.carrinhoDoCliente = carrinhoDoCliente;
+//    }
 
     @Override
     public String toString() {
-        return "ClienteEntity:: " + this.id + ", " + this.nome + ", " + this.carrinhoDoCliente;
+        return "";
+//        return "ClienteEntity:: " + this.id + ", " + this.nome + ", " + this.carrinhoDoCliente;
+    }
+
+    @Override
+    public ClienteEntity build(ClienteDTO dto) {
+        this.id = dto.getId();
+        this.cpf = dto.getCpf();
+        this.email = dto.getEmail();
+        this.endereco = dto.getEndereco();
+        this.nome = dto.getNome();
+        this.telefone = dto.getTelefone();
+        return this;
+    }
+
+    public List<ClienteEntity> createList(Set<ClienteDTO> listaDto) {
+        List<ClienteEntity> array = new ArrayList<ClienteEntity>();
+        for (ClienteDTO dto : listaDto) {
+            ClienteEntity entity = new ClienteEntity();
+            entity.build(dto);
+            array.add(entity);
+        }
+        return array;
+    }
+
+    @Override
+    public List<ClienteEntity> createList(List<ClienteDTO> listaDto) {
+        List<ClienteEntity> array = new ArrayList<ClienteEntity>();
+        for (ClienteDTO item : listaDto) {
+            ClienteEntity dto = new ClienteEntity();
+            dto.build(item);
+            array.add(dto);
+        }
+        return array;
     }
 
 }
