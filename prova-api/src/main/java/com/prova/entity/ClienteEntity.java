@@ -40,7 +40,7 @@ public class ClienteEntity implements BaseEntity<ClienteDTO>, Serializable {
     @Column(name = "ct_telefone")
     private String telefone;
     
-    @Column(name = "dp_cliente")
+    @Column(name = "dp_cpf")
     private String cpf;
 
     @OneToOne(
