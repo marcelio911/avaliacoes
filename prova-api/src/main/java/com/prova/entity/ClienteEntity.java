@@ -37,7 +37,7 @@ public class ClienteEntity implements BaseEntity<ClienteDTO>, Serializable {
     @Column(name = "ct_telefone")
     private String telefone;
     
-    @Max(value = 11, message = "Este CPF é inválido")
+    @Max(value = 13, message = "Este CPF é inválido")
     @Column(name = "dp_cliente")
     private String cpf;
 
