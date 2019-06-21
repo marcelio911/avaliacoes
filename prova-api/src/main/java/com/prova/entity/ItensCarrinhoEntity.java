@@ -87,13 +87,20 @@ public class ItensCarrinhoEntity implements BaseEntity<ItemCarrinhoDTO>, Seriali
     }
     
     @Override
-    public BaseEntity build(ItemCarrinhoDTO dto) {
+    public ItensCarrinhoEntity build(ItemCarrinhoDTO dto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<?> createList(List<ItemCarrinhoDTO> listaDto) {
+    public List<ItensCarrinhoEntity> createList(List<ItemCarrinhoDTO> listaDto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public String toString() {
+        return "id" + this.id + ", produtosNoCarrinho" + this.produtosNoCarrinho + ", quantidade: " + this.quantidade ;
+    }
+    
+    
 
 }

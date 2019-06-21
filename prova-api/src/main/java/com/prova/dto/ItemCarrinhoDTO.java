@@ -15,10 +15,13 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @XmlRootElement
 public class ItemCarrinhoDTO {
-
+    
+    @XmlTransient
     private Long idCliente;
     @XmlTransient
     private Long idProduto;
+    
+    private ClienteDTO cliente;
     private ProdutoDTO produto;
     private Integer quantidade;
 
@@ -29,6 +32,7 @@ public class ItemCarrinhoDTO {
         this.idCliente = novo.idCliente;
         this.idProduto = novo.idProduto;
         this.produto = novo.produto;
+        this.cliente = novo.cliente;
         this.quantidade = novo.quantidade;
     }
 
@@ -79,6 +83,7 @@ public class ItemCarrinhoDTO {
             item.idProduto = carrinho.getProdutosNoCarrinho().getId();
             item.produto = new ProdutoDTO().build(carrinho.getProdutosNoCarrinho());
             item.quantidade = carrinho.getQuantidade();
+            itens.add(item);
         }
         return itens;
     }

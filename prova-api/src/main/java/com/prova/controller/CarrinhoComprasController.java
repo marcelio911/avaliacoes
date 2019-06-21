@@ -1,6 +1,5 @@
 package com.prova.controller;
 
-import java.util.Objects;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -22,13 +21,10 @@ import com.prova.entity.ItensCarrinhoEntity;
 import com.prova.enums.HttpEnum;
 import com.prova.exception.CarrinhoComprasNotFoundException;
 import com.prova.response.CarrinhoComprasHttpResponse;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import lombok.extern.slf4j.Slf4j;
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 /**
  *
@@ -54,7 +50,7 @@ public class CarrinhoComprasController {
             }            
             CarrinhoComprasHttpResponse<CarrinhoComprasDTO> response = new CarrinhoComprasHttpResponse<CarrinhoComprasDTO>(
                     HttpEnum.MSG_SUCESSO_OPERACAO_GENERICA, HttpStatus.ACCEPTED);
-            return response.createList(items);
+            return response.build(new CarrinhoComprasDTO().build(saved));
         } catch (Exception ex) {
             return new CarrinhoComprasHttpResponse<CarrinhoComprasDTO>(HttpEnum.MSG_ERRO_GENERICO_MR0500
                     + ex.getMessage(),
@@ -76,23 +72,22 @@ public class CarrinhoComprasController {
                 ItemCarrinhoDTO dto = new ItemCarrinhoDTO().build(item1);
 //                items.add(dto);
             }           
-            return response.createList(new ItemCarrinhoDTO().createList(detalhes.get().getItemsNoCarrinho()));
+            return response.build(new CarrinhoComprasDTO().build(detalhes.get()));
 
         }
 
     }
     @RequestMapping(value = "/obterPorIdCliente/{id}", method = RequestMethod.GET)
-    public CarrinhoComprasHttpResponse<CarrinhoComprasDTO> obterPorId(@PathVariable Long id) {
+    public CarrinhoComprasHttpResponse<CarrinhoComprasDTO> obterPorIdCliente(@PathVariable Long id) {
         Optional<CarrinhoComprasEntity> detalhes = dao.findByIdCliente(id);
         CarrinhoComprasHttpResponse<CarrinhoComprasDTO> response = new CarrinhoComprasHttpResponse<CarrinhoComprasDTO>(
                 HttpEnum.MSG_SUCESSO_OPERACAO_GENERICA, HttpStatus.ACCEPTED);
-        if (Objects.isNull(detalhes)) {
+        if (!detalhes.isPresent()) {
             return new CarrinhoComprasHttpResponse<CarrinhoComprasDTO>(HttpEnum.MSG_ERRO_NENHUM_RESULTADO_MR0404, HttpStatus.BAD_REQUEST);
         } else {
             CarrinhoComprasDTO dto = new CarrinhoComprasDTO();
-            
             dto.build(detalhes.orElseThrow(() -> new CarrinhoComprasNotFoundException(HttpEnum.MSG_ERRO_NENHUM_RESULTADO_MR0404)));
-            return response.createList(new ItemCarrinhoDTO().createList(detalhes.get().getItemsNoCarrinho()));
+            return response.build(new CarrinhoComprasDTO().build(detalhes.get()));
         }
 
     }

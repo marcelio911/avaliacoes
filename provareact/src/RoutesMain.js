@@ -1,5 +1,6 @@
 import { 
-  createStackNavigator } from 'react-navigation';
+  createStackNavigator 
+} from 'react-navigation';
 import VitrineScreen from './screens/VitrineScreen';
 import ClienteScreen from './screens/ClienteScreen';
 import CarrinhoScreen from './screens/CarrinhoScreen';

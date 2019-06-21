@@ -1,6 +1,7 @@
 package com.prova.dto;
 
 import com.prova.entity.CarrinhoComprasEntity;
+import com.prova.entity.ItensCarrinhoEntity;
 import com.prova.interfaces.BaseDTO;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,7 +14,7 @@ public class CarrinhoComprasDTO implements BaseDTO<CarrinhoComprasEntity> {
 
     private ClienteDTO clienteNoCarrinho;
 
-    private List<ItemCarrinhoDTO> itemsNoCarrinho;
+    private Set<ItemCarrinhoDTO> itemsNoCarrinho;
 
     public CarrinhoComprasDTO() {
         // TODO Auto-generated constructor stub
@@ -35,18 +36,19 @@ public class CarrinhoComprasDTO implements BaseDTO<CarrinhoComprasEntity> {
         this.clienteNoCarrinho = clienteNoCarrinho;
     }
 
-    public List<ItemCarrinhoDTO> getItemsNoCarrinho() {
+    public Set<ItemCarrinhoDTO> getItemsNoCarrinho() {
         return itemsNoCarrinho;
     }
 
-    public void setItemsNoCarrinho(List<ItemCarrinhoDTO> itemsNoCarrinho) {
+    public void setItemsNoCarrinho(Set<ItemCarrinhoDTO> itemsNoCarrinho) {
         this.itemsNoCarrinho = itemsNoCarrinho;
     }
 
     @Override
     public CarrinhoComprasDTO build(CarrinhoComprasEntity entidade) {
         this.id = entidade.getId();
-//        this.clienteNoCarrinho = new ClienteDTO().build(entidade.getClienteNoCarrinho());
+        this.clienteNoCarrinho = new ClienteDTO().build(entidade.getClienteNoCarrinho());
+        this.setItemsNoCarrinho(new ItemCarrinhoDTO().createList(entidade.getItemsNoCarrinho()));
         return this;
     }
 

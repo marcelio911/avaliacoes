@@ -1,5 +1,6 @@
 package com.prova.response;
 
+import com.prova.dto.CarrinhoComprasDTO;
 import com.prova.dto.ItemCarrinhoDTO;
 import java.util.List;
 
@@ -17,35 +18,24 @@ import lombok.Setter;
 @Setter
 public class CarrinhoComprasHttpResponse<T> extends CustomResponse {
 
-	private boolean adicionado;
-	private Set<ItemCarrinhoDTO> listaGenerica;
+    private boolean adicionado;
+    private CarrinhoComprasDTO carrinho;
 
-	public CarrinhoComprasHttpResponse(HttpEnum resposta, HttpStatus status) {
-		super(resposta, status);
-	}
-	
-	public CarrinhoComprasHttpResponse(String resposta, HttpStatus status) {
-		super(resposta, status);
-	}
+    public CarrinhoComprasHttpResponse(HttpEnum resposta, HttpStatus status) {
+        super(resposta, status);
+    }
 
-	public CarrinhoComprasHttpResponse<T> build(boolean detalhes) {
-		this.adicionado = detalhes ;
-		return this;
-	}
-	
-	public CarrinhoComprasHttpResponse<T> createList(Set<ItemCarrinhoDTO> listaGenerica) {
-		this.listaGenerica = listaGenerica ;
-		return this;
-	}
+    public CarrinhoComprasHttpResponse(String resposta, HttpStatus status) {
+        super(resposta, status);
+    }
 
-	public boolean getAdicionado() {
-		return adicionado;
-	}
-	
-	public Set<ItemCarrinhoDTO> getListaGenerica() {
-		return listaGenerica;
-	}
-	
+    public CarrinhoComprasHttpResponse<T> build(CarrinhoComprasDTO carrinho) {
+        this.carrinho = carrinho;
+        return this;
+    }
 
+    public boolean getAdicionado() {
+        return adicionado;
+    }
 
 }

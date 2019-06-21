@@ -89,7 +89,7 @@ export default class VitrineScreen extends React.PureComponent {
         return (
             <TouchableOpacity onPress={() => this._onItemPress(item)} style={{ flexDirection: 'row', padding: 10, alignItems: 'center' }}>
                 {/*<Image style={{ height: 50, width: 50, borderRadius: 25 }} source={ item.miniatura } />*/}
-                <Image style={{ height: 50, width: 50, borderRadius: 25 }} source={ images.produtoIcon } />
+                <Image style={{ height: 50, width: 50, borderRadius: 25 }} source={ item.miniatura } />
                 <Produto produto={item}></Produto>
                 <Button style={styles.btn} title="+" onPress={() => this._onItemPress(item)} />
             </TouchableOpacity> 

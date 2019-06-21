@@ -11,7 +11,7 @@ import Autocomplete from 'react-native-autocomplete-input';
 import HeaderCustom from '../HeaderCustom.js';
 
 const initialState = {
-    usuario: null,
+    clienteSessao: null,
     isVisible: false,
     text: '',
     query: {
@@ -25,6 +25,12 @@ export default class ProcurarUsuario extends Component {
     state = { 
         ...initialState
     }
+
+    constructor(props){
+        super(props);
+    }
+
+    toggleAddCliente = () => this.setState(prevState => ({ clienteSessao: !prevState.clienteSessao }))
 
     load = async () => {
         try {
@@ -61,7 +67,7 @@ export default class ProcurarUsuario extends Component {
     }
 
     _filterData = async (query) => {
-
+        console.log("query:: ", JSON.stringify(query));
     }
 
     render() {
@@ -73,6 +79,12 @@ export default class ProcurarUsuario extends Component {
                 visible={this.props.isVisible}
                 animationType='slide' transparent={true}>
                 <HeaderCustom title="Pesquisar cliente: CPF, Telefone" /> 
+                
+                <View>
+                    <Text>Tesst: {this.props.isVisible}</Text>
+                    <Text>clientes: {this.state.clientes}</Text>
+                </View>
+
                 <Autocomplete
                     data={this.state.clientes}
                     defaultValue={query}
