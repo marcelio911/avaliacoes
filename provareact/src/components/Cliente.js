@@ -71,4 +71,3 @@ const styles = StyleSheet.create({
     },
 });
 
-AppRegistry.registerComponent(appName, () => Produto);

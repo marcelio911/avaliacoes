@@ -19,6 +19,10 @@ cp ./node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf ./android/ap
 react-native link
 react-native link react-native-vector-icons
 ```
+```
+yarn add @react-native-community/async-storage
+react-native link @react-native-community/async-storage
+```
 ### Resolvendo problemas se for Linux Ubuntu
 ```
 chmod 755 android/gradlew

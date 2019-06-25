@@ -22,6 +22,7 @@ import com.prova.entity.ClienteEntity;
 import com.prova.enums.HttpEnum;
 import com.prova.exception.ClienteNotFoundException;
 import com.prova.response.ClienteHttpResponse;
+import java.util.Set;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -71,20 +72,19 @@ public class ClienteController {
         }
     }
 
-    @PostMapping(value = "/obterPorTelCpf/{filter}", produces = "application/json")
+    @PostMapping(value = "/obterPorTelCpf", produces = "application/json")
     public ClienteHttpResponse<ClienteDTO> obterPorTelCpf(@RequestBody @Valid ClienteFilterDTO filter) {
-        Optional<ClienteEntity> detalhes = dao.findByTelCpf(filter);
+        Set<ClienteEntity> detalhes = dao.findByTelCpf(filter);
         ClienteHttpResponse<ClienteDTO> response = new ClienteHttpResponse<ClienteDTO>(
                 HttpEnum.MSG_SUCESSO_OPERACAO_GENERICA, HttpStatus.ACCEPTED);
         if (Objects.isNull(detalhes)) {
             return new ClienteHttpResponse<ClienteDTO>(HttpEnum.MSG_ERRO_NENHUM_RESULTADO_MR0404, HttpStatus.BAD_REQUEST);
         } else {
             ClienteDTO dto = new ClienteDTO();
-            dto.build(detalhes.get());
+            dto.createList(detalhes);
             if (Objects.nonNull(dto)) {
                 return response.build(dto);
             }
-            dto.build(detalhes.orElseThrow(() -> new ClienteNotFoundException()));
             return response.build(dto);
         }
 

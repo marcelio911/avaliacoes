@@ -83,6 +83,14 @@ public class ProdutoEntity implements BaseEntity<ProdutoDTO> {
         this.miniatura = miniatura;
     }
 
+    public Set<ItensCarrinhoEntity> getItensNoCarrinho() {
+        return itensNoCarrinho;
+    }
+
+    public void setItensNoCarrinho(Set<ItensCarrinhoEntity> itensNoCarrinho) {
+        this.itensNoCarrinho = itensNoCarrinho;
+    }
+
     @Override
     public String toString() {
         return "ProdutoEntity:: " + this.id + ", " + this.descricao + ", " + this.valor;
@@ -93,6 +101,7 @@ public class ProdutoEntity implements BaseEntity<ProdutoDTO> {
         this.id = dto.getId();
         this.descricao = dto.getDescricao();
         this.valor = dto.getValor();
+        this.miniatura = dto.getMiniatura();
         return this;
     }
 

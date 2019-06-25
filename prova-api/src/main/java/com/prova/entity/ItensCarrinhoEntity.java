@@ -38,7 +38,7 @@ public class ItensCarrinhoEntity implements BaseEntity<ItemCarrinhoDTO>, Seriali
     private Long id;
     
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "id_cliente_no_carrinho")
+    @JoinColumn(name = "id_produto_no_carrinho")
     private ProdutoEntity produtosNoCarrinho;
     
     @ManyToMany(fetch = FetchType.EAGER,
@@ -51,7 +51,7 @@ public class ItensCarrinhoEntity implements BaseEntity<ItemCarrinhoDTO>, Seriali
 
     @Column
     @NotNull
-    @Size(max = 100)
+//    @Size(max = 100)
     private Integer quantidade;
 
     public Integer getQuantidade() {
@@ -88,7 +88,9 @@ public class ItensCarrinhoEntity implements BaseEntity<ItemCarrinhoDTO>, Seriali
     
     @Override
     public ItensCarrinhoEntity build(ItemCarrinhoDTO dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.produtosNoCarrinho = new ProdutoEntity().build(dto.getProduto());
+        this.quantidade = dto.getQuantidade();
+        return this;
     }
 
     @Override

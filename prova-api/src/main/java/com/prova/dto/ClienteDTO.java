@@ -110,6 +110,15 @@ public class ClienteDTO implements BaseDTO<ClienteEntity> {
         }
         return array;
     }
+    public List<ClienteDTO> createList(Set<ClienteEntity> listaEntity) {
+        List<ClienteDTO> array = new ArrayList<ClienteDTO>();
+        for (ClienteEntity item : listaEntity) {
+            ClienteDTO dto = new ClienteDTO();
+            dto.build(item);
+            array.add(dto);
+        }
+        return array;
+    }
 
     @Override
     public String toString() {

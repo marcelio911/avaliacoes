@@ -8,7 +8,8 @@ import {
     AppRegistry,
     ActivityIndicator,
     Image,
-    Alert
+    Alert,
+    Text
 } from 'react-native';
 import { YellowBox } from 'react-native';
 import Produto from '../components/Produto';
@@ -57,6 +58,10 @@ export default class VitrineScreen extends React.PureComponent {
         super(props);
     }
 
+    closeModal(){
+        this.refs.modal.close();
+    }
+
     loadProdutos = async () => {
         try {
             const response = await fetch(`${server}/api/produto/listarTodos`,
@@ -68,7 +73,6 @@ export default class VitrineScreen extends React.PureComponent {
                     },
                 })
             const responseJson = await response.json();
-            console.log("responseJsresponseJson.listaGenericaon:: ", JSON.stringify(responseJson.listaGenerica));
             if (!responseJson.listaGenerica) {
                 YellowBox.ignoreWarnings(['Informação: ...ainda não existem dados registrados']);
             }
@@ -89,7 +93,7 @@ export default class VitrineScreen extends React.PureComponent {
         return (
             <TouchableOpacity onPress={() => this._onItemPress(item)} style={{ flexDirection: 'row', padding: 10, alignItems: 'center' }}>
                 {/*<Image style={{ height: 50, width: 50, borderRadius: 25 }} source={ item.miniatura } />*/}
-                <Image style={{ height: 50, width: 50, borderRadius: 25 }} source={ item.miniatura } />
+                <Image style={{ height: 90, width: 90, borderRadius: 25 }} source={{ uri: '../'+ item.miniatura }} /> 
                 <Produto produto={item}></Produto>
                 <Button style={styles.btn} title="+" onPress={() => this._onItemPress(item)} />
             </TouchableOpacity> 
@@ -125,6 +129,12 @@ export default class VitrineScreen extends React.PureComponent {
         }
     }
 
+    onBackButtonPress () {
+
+        console.log("this.state:: ", JSON.stringify(this.state), ", props", JSON.stringify(this.props));
+
+    }
+
     render() {
         if (this.state.isLoading) {
             return <View style={{
@@ -135,7 +145,7 @@ export default class VitrineScreen extends React.PureComponent {
         } else if (this.state.showClienteModal) {
             return (
                 <View>
-                    <ProcurarUsuario isVisible={true} />
+                    <ProcurarUsuario isVisible={true} closeModal={() => this.closeModal()} />
                 </View>
             );
         } else if (this.state.showCarrinhoComprasModal) {

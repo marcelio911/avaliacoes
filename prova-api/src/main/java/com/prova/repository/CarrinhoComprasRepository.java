@@ -13,7 +13,6 @@ public interface CarrinhoComprasRepository extends JpaRepository<CarrinhoCompras
     @Query(value = "select * from tb_carrinho_compras where id_cliente_no_carrinho = ?1", nativeQuery = true)
     Optional<CarrinhoComprasEntity> findByIdCliente(Long id);
     
-    @Query(value = "select * from tb_carrinho_compras where produto = ?1", nativeQuery = true)
-    Optional<CarrinhoComprasEntity> validarProduto(Long id);
+   
 
 }

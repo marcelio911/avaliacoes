@@ -1,8 +1,11 @@
 package com.provareact;
 
 import com.facebook.react.ReactActivity;
+import com.facebook.react.ReactInstanceManager;
 
 public class MainActivity extends ReactActivity {
+
+     private ReactInstanceManager mReactInstanceManager;
 
     /**
      * Returns the name of the main component registered from JavaScript.
@@ -11,5 +14,14 @@ public class MainActivity extends ReactActivity {
     @Override
     protected String getMainComponentName() {
         return "provareact";
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mReactInstanceManager != null) {
+            mReactInstanceManager.onBackPressed();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import com.prova.entity.ClienteEntity;
 import com.prova.repository.ClienteRepository;
 import java.util.Objects;
+import java.util.Set;
 
 @Controller
 public class ClienteDAO {
@@ -21,7 +22,7 @@ public class ClienteDAO {
         return repo.findAll();
     }
     
-    public Optional<ClienteEntity> findByTelCpf(ClienteFilterDTO dto) {
+    public Set<ClienteEntity> findByTelCpf(ClienteFilterDTO dto) {
         return repo.findByTelCpf(dto.getTelefone(), dto.getCpf());
     }
 

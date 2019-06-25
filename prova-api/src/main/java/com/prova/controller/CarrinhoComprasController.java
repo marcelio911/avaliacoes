@@ -21,10 +21,11 @@ import com.prova.entity.ItensCarrinhoEntity;
 import com.prova.enums.HttpEnum;
 import com.prova.exception.CarrinhoComprasNotFoundException;
 import com.prova.response.CarrinhoComprasHttpResponse;
-import java.util.HashSet;
 import java.util.Set;
 
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -35,6 +36,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api/carrinho")
 @Slf4j
 public class CarrinhoComprasController {
+    
+    final Logger logger = LoggerFactory.getLogger(CarrinhoComprasController.class);
 
     @Autowired
     private CarrinhoComprasDAO dao;
@@ -43,11 +46,7 @@ public class CarrinhoComprasController {
     public CarrinhoComprasHttpResponse<CarrinhoComprasDTO> add(@RequestBody @Valid ItemCarrinhoDTO item) throws Exception {
         try {
             CarrinhoComprasEntity saved = dao.add(item);
-            Set<ItemCarrinhoDTO> items = new HashSet<ItemCarrinhoDTO>();
-            for (ItemCarrinhoDTO item1 : items) {
-                ItemCarrinhoDTO dto = new ItemCarrinhoDTO(item1);
-                items.add(dto);
-            }            
+            this.logger.info("CarrinhoComprasController:add:: " + saved.toString());
             CarrinhoComprasHttpResponse<CarrinhoComprasDTO> response = new CarrinhoComprasHttpResponse<CarrinhoComprasDTO>(
                     HttpEnum.MSG_SUCESSO_OPERACAO_GENERICA, HttpStatus.ACCEPTED);
             return response.build(new CarrinhoComprasDTO().build(saved));
@@ -60,11 +59,11 @@ public class CarrinhoComprasController {
 
     @PostMapping(value = "/validarProduto/{objeto}", produces = "application/json")
     public CarrinhoComprasHttpResponse<CarrinhoComprasDTO> validarProduto(@RequestBody @Valid ItemCarrinhoDTO objeto) {
-        Optional<CarrinhoComprasEntity> produto = dao.validarProduto(objeto);
+        Optional<ItensCarrinhoEntity> itensCarrinho = dao.validarProduto(objeto);
         Optional<CarrinhoComprasEntity> detalhes = dao.findByIdCliente(objeto.getIdCliente());
         CarrinhoComprasHttpResponse<CarrinhoComprasDTO> response = new CarrinhoComprasHttpResponse<CarrinhoComprasDTO>(
                 HttpEnum.MSG_SUCESSO_OPERACAO_GENERICA, HttpStatus.ACCEPTED);
-        if (!produto.isPresent()) {
+        if (!itensCarrinho.isPresent()) {
             return new CarrinhoComprasHttpResponse<CarrinhoComprasDTO>(HttpEnum.MSG_ERRO_NENHUM_RESULTADO_MR0404, HttpStatus.BAD_REQUEST);
         } else {
             Set<ItensCarrinhoEntity> items = detalhes.get().getItemsNoCarrinho();
